@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    	  <%- include partials/head %>
+    </head>
+    <body>
+        <div class="top-container font-style">
+            <%- include partials/nav_partida %>
+        </div>
+       <div class="mid-container">
+           <p class="notificacion capsuula">&nbsp;<%- include partials/notificacion %>&nbsp;</p>
+               <div class="caja">
+                    <h2 class="pacifico">Crear Partida</h2>
+                    <p class="notasInformativas">Introduce los datos para crear la partida. Los campos con (<font color="red">*</font>) son obligatorios.</p>
+                    <form action="/partida/daoCrearPartida" method="POST">
+                        <table class="tablasNormales quitar_bordes">
+                         <tr class="capsuula">
+                           <td><label for="nombre">Nombre<font color ="red">*</font></label></td>
+                           <td><input type="text" name="nombre" value=""></td>
+                         </tr>
+                         <tr class="capsuula">
+                           <td><label for="numMax_jugadores">Número de jugadores (entre 3 y 7)<font color ="red">*</font></label></td>
+                           <td><input type="number" name="numMax_jugadores" min="3" max="7" value="3"></td>
+                         </tr>
+                         <tr>
+                           <td></td>
+                           <td><button class="botonFormulario capsuula" type="submit">Crear</button></td>
+                         </tr>
+                        </table>
+                    </form>
+                <br>
+                <a href="/usuario/profile">
+                    <p class="back pacifico">Volver a tu perfil</p>
+                </a>
+                <br>
+                <br>
+            </div>
+       </div>
+    </body>
+</html>

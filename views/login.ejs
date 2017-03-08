@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include partials/head %>
+</head>
+
+<body>
+    <div class="top-container pacifico">
+        <%- include partials/nav_usuario %>
+    </div>
+    <div class="mid-container">
+           <p class="notificacion capsuula">&nbsp;<%- include partials/notificacion %>&nbsp;</p>
+            <div class="caja">
+                <h2 class="pacifico">Ingreso en el sistema</h2>
+                <form action="/usuario/daoVerificar_usuario" method="POST">
+                    <table class="tablasNormales quitar_bordes">
+                        <tr class="capsuula">
+                            <td><label for="usuario">Nombre de usuario</label></td>
+                            <td><input type="text" name="usuario" value=""></td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="clave">Contraseña</label></td>
+                            <td><input type="password" name="clave" value=""><br></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding-top: 20px;"><button class="botonFormulario capsuula" type="submit" >Entrar</button></td>
+                        </tr>
+                    </table>
+                </form>
+                <br>
+                <a href="/">
+                    <p class="back pacifico">Volver a la página principal</p>
+                </a>
+                <br>
+                <br>
+            </div>
+    </div>
+</body>
+
+</html>

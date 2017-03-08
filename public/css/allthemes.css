@@ -1,0 +1,346 @@
+/*----------- GENERAL -----------*/
+/* Color por defecto del fondo de la página */
+html{
+	background: #ececec;
+}
+/* Necesario para que se ajuste bien al navegador web */
+body{
+	margin: 0px;
+	/* Fuente por defecto para toda la pagina*/
+        font-family: 'Roboto', sans-serif;
+	/* Tamaño por e*/
+	font-size: 20px;
+}
+a:link
+{
+ text-decoration:none;
+}
+/*----------- NAVBAR -----------*/
+/*----------- 1. Contenedor TOP -----------*/
+.top-container{
+    height: 110px;
+    border-bottom: 1px solid #5f5f5f;
+    background: #36bfff;
+    display: flex;
+    padding-bottom: 10px;
+}
+.top-container > div{
+	display: flex;
+	height: 100%;
+}
+.roboto{
+	font-family: 'Roboto', sans-serif;
+	color: grey;
+	font-size: 13px;
+}
+/*----------- 1.1. Parte izquierda de TOP en nav_usuario -----------*/
+.top-left-usuario{
+	width: auto;
+	margin: auto;
+	float: left;
+	display: block;
+}
+/*----------- 1.1.1. Iconos y opciones -----------*/
+.top-left-usuario > div{
+    display: inline;
+    width: 110px;
+    float: left;
+    text-align: center;
+}
+/*----------- 1.1. Parte izquierda de TOP  en nav_partida -----------*/
+.top-left-partida{
+	width: auto;
+	margin: auto;
+	float: left;
+	display: block;
+}
+/*----------- 1.1.1. Iconos y opciones -----------*/
+.top-left-partida > div{
+    display: inline;
+    width: 110px;
+    float: left;
+    text-align: center;
+}
+
+/*----------- 1.2. Parte central de TOP -----------*/
+.top-center{
+    margin-left: auto;
+    margin-right: auto;
+}
+/*----------- 1.3. Parte derecha de TOP -----------*/
+.top-right{
+	width: auto;
+	margin: auto;
+}
+/*----------- 1.3.1. Caja negra del estado del usuario -----------*/
+.status{
+    display: block;
+    padding: 10px;
+    background-color: #36bfff;
+    color: #000000;
+    opacity: 1;
+    border-radius: 15px 3px 15px 3px;
+    margin-bottom: auto;
+    margin-top: 30px;
+    margin-right: 10px;
+    text-align: center;
+    width: 100px;
+    float: right;
+    transition: all 1s;
+    font-size: 17px;
+}
+.status:hover{
+    background-color: white; 
+    box-shadow: 5px 5px 10px -5px rgba(41,41,41,.53);
+}
+.status > p{
+	margin: 0px;
+}
+/*----------- CUERPO -----------*/
+
+.mid-container{
+    padding: 20px 20px 20px 20px;
+}
+.content{
+
+	opacity: 0.6;
+	padding: 20px;
+}
+.content > a > i{
+	color: #9a6a2f;
+}
+.back{
+    display: inline;
+    color: #b9b9b9;
+    transition: all 1s;
+}
+
+.back:hover{
+    color: #14b4ff;
+}
+/*----------Mensajes de error o de exito -----------*/
+.success{   
+    text-align: center;
+    padding: 1px;
+    background: #80cca0;
+}
+.notificacion{    
+    text-align: center;
+    padding: 1px;
+    font-weight: bold;
+    transition: all 1s ease;
+    margin-top: 0px;
+    font-size: 14px;
+}
+.sinFallos{
+    color: green;
+}
+.conFallos{
+    color: red;
+}
+
+.negrita{
+    font-weight: bold;
+}
+
+@keyframes cssAnimation {
+    to {
+		padding: 0px;
+        width:0;
+        height:0;
+        overflow:hidden;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+		padding: 0px;
+        width:0;
+        height:0;
+        visibility:hidden;
+    }
+}
+.caja{
+    text-align: center;
+    background: #fff;
+    border-radius: 40px 10px 40px 10px;
+    /* margin: 20px; */
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 60%;
+    box-shadow: 5px 5px 10px -5px rgba(41,41,41,.53);
+}
+
+/* Tipo de letra 'Pacifico' */
+@font-face {
+    font-family: "Pacifico";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Pacifico.woff") format("woff"), url("../fonts/Pacifico.ttf") format("truetype");
+}
+/* Tipo de letra 'Capsuula' */
+@font-face {
+    font-family: "Capsuula";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Capsuula.woff") format("woff"), url("../fonts/Capsuula.ttf") format("truetype");
+}
+/* Tipo de letra 'Wachinanga' */
+@font-face {
+    font-family: "Wachinanga";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Wachinanga.woff") format("woff"), url("../fonts/Wachinanga.ttf") format("truetype");
+}
+/* Tipo de letra 'Enemy' */
+@font-face {
+    font-family: "Enemy";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Enemy.woff") format("woff"), url("../fonts/Enemy.ttf") format("truetype");
+}
+/* Tipo de letra 'TypeWriter' */
+@font-face {
+    font-family: "TypeWriter";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/TypeWriter.woff") format("woff"), url("../fonts/TypeWriter.ttf") format("truetype");
+}
+/* Tipo de letra 'Angelic' */
+@font-face {
+    font-family: "Angelic";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Angelic.woff") format("woff"), url("../fonts/Angelic.ttf") format("truetype");
+}
+/* Tipo de letra 'Rolande' */
+@font-face {
+    font-family: "Rolande";
+    font-style: normal;
+    font-weight: normal;
+    src: local("?"), url("../fonts/Rolande.woff") format("woff"), url("../fonts/Rolande.ttf") format("truetype");
+}
+.pacifico{
+    font-family: Pacifico;
+}
+.capsuula{
+    font-family: Capsuula;   
+}
+.wachinanga{
+    font-family: Wachinanga;   
+}
+.enemy{
+    font-family: Enemy;
+}
+.typewriter{
+    font-family: TypeWriter;
+}
+.angelic{
+    font-family: angelic;
+}
+.rolande{
+    font-family: Rolande;
+    font-size: 30px; 
+}
+
+
+
+h2, h3{
+    color: #7d7d7d;
+}
+
+.padding_top{
+    padding-top: 20px;
+}
+
+.notasInformativas{
+   font-family: Capsuula;
+   font-size: 18px;
+}
+
+.sexos{
+    display: inline;
+    font-size: 17px;
+    vertical-align: text-top;
+}
+
+.colorSubtitulo{
+    color: #b9b9b9;
+}
+
+.colorSubtitulo a{
+    color: #65a4c3;
+}
+
+.inicio{
+    transition: all 0.6s;
+}
+
+.inicio:hover{
+    color: #14b4ff;
+}
+
+.centrar{
+    text-align: center;
+}
+
+.infoPartidaMargin{
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.marginJugadoresPicos{
+        margin-right: 5px;
+}
+
+.font16{
+    font-size: 16px;
+}
+
+.reglas-parrafos{
+    text-align: left;
+}
+
+.reglas-titulos{
+   text-align: left;
+   font-weight: bold;
+}
+
+.reglas-imagenes{
+    margin: 15px;
+}
+
+.cartas-especiales{
+    width: 40%;
+}
+
+.cartas-normales{
+    width: 50%;
+}
+
+.final{
+    width: 20%; 
+}
+
+.movimiento{
+    width: 25%;
+}
+.fotoPerfil img{
+    margin-bottom: auto;
+    margin-top: 30px;
+    margin-right: 10px;
+ border-radius: 200px 200px 200px 200px;
+-moz-border-radius: 200px 200px 200px 200px;
+-webkit-border-radius: 200px 200px 200px 200px;
+border: 0px solid #000000;
+}
+.fotoComentario img{
+    display: inline;
+    margin-bottom: auto;
+    margin-top: 5px;
+    margin-right: 10px;
+ border-radius: 200px 200px 200px 200px;
+-moz-border-radius: 200px 200px 200px 200px;
+-webkit-border-radius: 200px 200px 200px 200px;
+border: 0px solid #000000;
+}

@@ -1,0 +1,75 @@
+div.casillaDeshabilitada {
+    width: 60px;
+    height: 60px;
+    border: 0px solid #523b1c;
+    float: left;
+    margin: 0px;
+}
+div.casillaEnJuego {
+    width: 60px;
+    height: 60px;
+    border: 0px solid #523b1c;
+    float: left;
+    margin: 0px;
+}
+div.carta{
+    width: 60px;
+    height: 60px;
+    border: 0px solid #523b1c;
+    float: left;
+    margin: 0px;
+}
+div.carta:hover {
+    border: 0px solid #0f89ed;
+    box-shadow: rgba(0, 133, 255, 0.8) 10px 10px 10px 40px;
+    -webkit-box-shadow: rgba(1, 186, 255, 0.8) 0 0 10px 4px;
+    -moz-box-shadow: rgba(0, 64, 255, 0.8) 0 0 10px 4px;
+    -o-box-shadow: rgba(0, 18, 255, 0.8) 0 0 10px 4px;
+}
+div.cartaEnJuego{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin: 0px;
+    border: 0px solid #0f89ed;
+    box-shadow: rgba(0, 133, 255, 0.8) 10px 10px 10px 40px;
+    -webkit-box-shadow: rgba(1, 186, 255, 0.8) 0 0 10px 4px;
+    -moz-box-shadow: rgba(0, 64, 255, 0.8) 0 0 10px 4px;
+    -o-box-shadow: rgba(0, 18, 255, 0.8) 0 0 10px 4px;
+}
+div.casillaEnJuego:hover {
+    border: 0px solid #edab0f;
+    box-shadow: rgba(255, 184, 0, 0.8) 10px 10px 10px 40px;
+    -webkit-box-shadow: rgba(255, 255, 1, 0.8) 0 0 10px 4px;
+    -moz-box-shadow: rgba(255, 207, 0, 0.8) 0 0 10px 4px;
+    -o-box-shadow: rgba(255, 168, 0, 0.8) 0 0 10px 4px;
+}
+.comentario{
+    width: 40%;
+    border: 2px solid #ffffff;
+    background: rgb(255, 255, 255);
+    padding: 15px;
+    /* margin: 2px; */
+    border-radius: 15px 5px 15px 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5px;
+}
+.comentario textarea {
+    border-radius: 5px 20px 5px 20px;
+    /* color: red; */
+    background-color: #f7f7f7;
+    display: block;
+    width: 100%;
+}
+
+.fechaComentario{
+    color: #a7a7a7;
+    font-size: smaller;
+}
+
+.userComentario{
+    color: #0089ff;
+    font-size: 30px;
+}
+

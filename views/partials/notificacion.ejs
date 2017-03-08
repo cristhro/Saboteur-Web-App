@@ -1,0 +1,7 @@
+    <% if (success.isSuccess){ %>
+            <span class="sinFallos typewriter"><%=success.msg %><span>
+    <%} else { %>
+            <% if (error.isError){ %>
+            <span class="conFallos typewriter"><%=error.msg%><span>
+        <%}%>
+    <%}%>

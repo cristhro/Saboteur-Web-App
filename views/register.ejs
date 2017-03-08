@@ -1,0 +1,63 @@
+  <!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <%- include partials/head %>
+</head>
+
+<body>
+    <div class="top-container pacifico">
+        <%- include partials/nav_usuario %>
+    </div>
+    <div class="mid-container">
+            <p class="notificacion capsuula">&nbsp;<%- include partials/notificacion %>&nbsp;</p>
+            <div class="caja">
+                <h2 class="pacifico">Nuevo usuario</h2>
+                <p class="notasInformativas">Introduce tus datos de usuario. Los campos con (<font color="red">*</font>) son obligatorios.</p>
+                <br>
+                <form action="/tablero/daoInsertar_Usuario" method="POST" enctype="multipart/form-data">
+                    <table class="tablasNormales quitar_bordes">
+                        <tr class="capsuula">
+                            <td><label for="usuario">Nombre de usuario<font color ="red">*</font></label></td>
+                            <td><input type="text" name="usuario" value=""></td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="clave">Contraseña<font color ="red">*</font></label></td>
+                            <td><input type="password" name="clave" value=""></td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="nombre_completo"> Nombre Completo<font color ="red">*</font></label></td>
+                            <td><input type="text" name="nombre_completo" value=""></td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="sexo"> Sexo<font color ="red">*</font></label></td>
+                            <td>
+                                <input type="radio" name="sexo" value="M"><p class="sexos">Hombre</p>
+                                <input type="radio" name="sexo" value="F"><p class="sexos">Mujer</p>
+                            </td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="nacimiento">Fecha de nacimiento<font color ="red">*</font></label></td>
+                            <td><input type="date" name="nacimiento" value=""></td>
+                        </tr>
+                        <tr class="capsuula">
+                            <td><label for="Imagen">Imagen</label></td>
+                            <td><input type="file" name="imagen" value=""></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="padding-top: 20px;"><button class="botonFormulario capsuula" type="submit"> Crear cuenta</button></td>
+                        </tr>
+                    </table>
+                </form>
+                <br>
+                <a href="/">
+                    <p class="back pacifico">Volver a la página principal</p>
+                </a>
+                <br>
+                <br>
+            </div>
+    </div>
+</body>
+
+</html>

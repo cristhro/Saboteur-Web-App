@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <%- include partials/head %>
+</head>
+
+<body>
+    <div class="top-container font-style">
+        <%- include partials/nav_partida %>
+    </div>
+    <div class="mid-container">
+           <p class="notificacion capsuula">&nbsp;<%- include partials/notificacion %>&nbsp;</p>
+            <h2 class="pacifico centrar noMarginTop">Bienvenido, <%=usuario%> </h2>
+
+            <!-- Begin Partidas abiertas -->
+            <div class="caja">
+                <h3 class="pacifico colorSubtitulo">&nbsp;Partidas abiertas</h3>
+                <p class="notasInformativas">Las siguientes partidas han sido creadas por ti, pero aún están a la espera de recibir jugadores.</p>
+                <table>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Jugadores</th>
+                    <% datosPerfil.forEach(function(partida) {
+                        if(partida.estado === 'abierta' && partida.creador === usuario){
+                    %>
+                    <tr>
+                        <td><%=partida.nombre%></td>
+                        <td><%=partida.fecha.getDate() +"/"+ partida.fecha.getMonth() +"/"+ partida.fecha.getFullYear() %></td>
+                        <td><%=partida.num_jugadores%>&nbsp;/&nbsp;<%=partida.numMax_jugadores%></td>
+                        <% if(partida.num_jugadores >= 3){ %>
+                            <td><a href="/partida/daoCerrarPartida/<%=partida.id_partida%>"><button class="botonFormulario capsuula">Cerrar</button></a></td>
+                        <% } %>
+                    </tr>
+                    <%}}); %>
+                </table>
+            </div>
+            <!-- End Partidas abiertas -->
+            <br>
+            <!-- Begin Partidas activas -->
+            <div class="caja">
+                <h3 class="pacifico colorSubtitulo">&nbsp;Partidas activas</h3>
+                <p class="notasInformativas">Puedes ver el estado actual de tus partidas. Podrás jugar en las partidas en las que es tu turno.</p>
+                <table>
+                <th>Nombre</th>
+                <th>Creador</th>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <%datosPerfil.forEach(function(partida){%>
+                <%if(partida.estado === 'activa' && partida.nombre_jugadores.includes(usuario)){%>
+                    <%if(partida.turno === usuario){%>
+                        <tr>
+                            <td class="partida_activa"><%=partida.nombre%></td>
+                            <td class="partida_activa"><%=partida.creador%></td>
+                            <td class="partida_activa"><%=partida.fecha.getDate() +"/"+ partida.fecha.getMonth() +"/"+ partida.fecha.getFullYear() %></td>
+                            <td class="partida_activa"><%=partida.turno%></td>
+                            <td><a href="/tablero/daoMostrarTablero/<%=partida.id_partida%>"><button class="botonJugar capsuula">Jugar</button></a></td>
+                        </tr>
+                    <%}else {%>
+                        <tr>
+                            <td><%=partida.nombre%></td>
+                            <td><%=partida.creador%></td>
+                            <td><%=partida.fecha.getDate() +"/"+ partida.fecha.getMonth() +"/"+ partida.fecha.getFullYear() %></td>
+                            <td><%=partida.turno%></td>
+                            <td><a href="/tablero/daoMostrarTablero/<%=partida.id_partida%>"><button class="botonVer capsuula">Ver</button></a></td>
+                        </tr>
+                <%}}});%>
+                </table>
+            </div>
+            <!-- End Partidas activas -->
+            <br>           
+            <!-- Begin Partidas terminadas -->
+            <div class="caja">
+                <h3 class="pacifico colorSubtitulo">&nbsp;Partidas terminadas</h3>
+                <p class="notasInformativas">Aquí se muestran las partidas terminadas. Puedes ver cómo quedaron al finalizar.</p>
+                <table>
+                    <th>Nombre</th>
+                    <th>Creador</th>
+                    <th>¿Ganaste?</th>
+                    <% datosPerfil.forEach(function(partida) {
+                    if(partida.estado === 'terminada' && partida.nombre_jugadores.includes(usuario)){
+                    %>
+                    <tr>
+                        <td><%=partida.nombre%></td>
+                        <td><%=partida.creador%></td>
+                        <%if(partida.ganador.includes(usuario)){%>
+                            <td>Sí</td>
+                        <%} else {%>
+                            <td>No</td>
+                        <%}%>
+                        <td><a href="/tablero/daoMostrarTablero/<%=partida.id_partida%>"><button class="botonVer capsuula">Ver</button></a></td>
+                    </tr>
+                    <%}}); %>
+                </table>
+            </div>
+            <!-- End  Partidas terminadas -->
+    </div>
+</body>
+
+</html>

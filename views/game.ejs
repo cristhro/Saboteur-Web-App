@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+    	<%- include partials/head %>
+    </head>
+    <body>
+        <div class="top-container font-style">
+            <%- include partials/nav_partida %>
+        </div>
+        <div class="mid-container">
+           <p class="notificacion capsuula">&nbsp;<%- include partials/notificacion %>&nbsp;</p>
+                <a href="/tablero/daoMostrarTablero/<%=datosPartida.id_partida%>"><button class="botonFormulario capsuula centrarInherit"> Pulsa Aqui para actualizar la pagina </button></a>
+                <!-- Begin datos partida  -->
+                <div class="caja">
+                   <h2 class="pacifico">Partida: <%= datosPartida.nombre%></h2>
+                   <% if(datosPartida.rol === "buscador"){ %>
+                   <p class="capsuula negrita">¡Recuerda que eres Buscador y tu misión es encontrar la pepita de oro!</p>
+                   <% }else{ %>
+                   <p class="capsuula negrita">¡Recuerda que eres Saboteador y tu misión es evitar que los Buscadores encuentren la pepita de oro!</p>
+                   <% } %>
+                   <table class="tablaInfoPartida">
+                        <tr>
+                            <td class="izq">Creada por: </td>
+                            <td class="der"><%=datosPartida.creador%></td>
+                        </tr>
+                        <tr>
+                            <td class="izq">Jugadores:</td>
+                            <td class="der">
+                                <%datosJugadores.forEach(function (jugador) {%>
+                                    <span ><%=jugador.usuario%> </span>
+                                <%})%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="izq">Turno de:</td>
+                            <td class="der"><%=datosPartida.turno%></td>
+                        </tr>
+                        <tr>
+                            <td class="izq">Turnos restantes:</td>
+                            <td class="der"><%=datosPartida.turnos_restantes%></td>
+                        </tr>
+                   </table>
+               </div>
+               <!-- End datos partida  -->
+               <br>
+                <!-- Begin tablero  -->
+                <div class="caja">
+                    <h3 class="pacifico">Tablero</h3>
+                    <div class="tablero">
+                        <table>
+                            <%  datosTablero.columnas.forEach(function (filas, c) { %>
+                                <tr>
+                                    <% filas.fila.forEach(function (casilla, f) { %>
+                                        <%/*DESHABILITAMOS CARTAS  SI NO SE HA SELECCIONADO UNA CARTA NORMAL */%>
+                                        <% if (datosJuego.cartaEnJuego.carta === null && datosJuego.cartaEspecialEnJuego.carta === null){ /* Si no se ha seleccionado una 'CARTA NORMAL' , entonces deshabilitamos las casillas, es decir quitamos la etiqueta de enlace 'href' */%>
+                                            <% if (casilla.carta === ''){/* Si la casilla es vacia */%>
+                                                <td><div class="casillaDeshabilitada"></div></td>
+                                            <%}else{ %>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></td>
+                                            <%}%>
+                                        <% } else if (datosJuego.cartaEnJuego.carta !== null){ /* SI SE HA SELECCIONADO: CARTA NORMAL*/%>
+                                            <% if (casilla.carta === '' ){                          /*SI ES UNA CASILLA VACIA -> CREAMOS ENLACE*/%>
+                                                <td><a href="/tablero/ejecutar_movimiento/<%=datosPartida.id_partida%>/<%=casilla.fila%>/<%=casilla.columna%>/<%=datosJuego.cartaEnJuego.carta%>"><div class="casillaEnJuego"></div></a></td>
+                                            <%}else { %>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></td>
+                                            <%}%>
+                                        <% } else if (datosJuego.cartaEspecialEnJuego.carta === 'Lupa'){ /*SI SE HA SELECCIONADO: CARTA ESPECIAL = LUPA*/%>
+                                            <% if (casilla.carta === '' ){  %>
+                                                <td><div class="casillaDeshabilitada"></div></td>
+                                            <%}else if(casilla.carta === 'DNK'){                             /*SI ES UNA CASILLA OCULTA -> CREAMOS ENLACE*/%>
+                                                <td><a href="/tablero/Lupa/<%=datosPartida.id_partida%>/<%=casilla.fila%>/<%=casilla.columna%>/<%=datosJuego.cartaEspecialEnJuego.id%>"><div class="casillaEnJuego"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></a></td>
+                                            <%}else { %>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></td>
+                                            <%}%>
+                                        <% } else if (datosJuego.cartaEspecialEnJuego.carta === 'Bomba'){ /*SI SE HA SELECCIONADO: CARTA ESPECIAL = BOMBA*/%>
+                                            <% if (casilla.carta === '' ){%>
+                                                <td><div class="casillaDeshabilitada"></div></td>
+                                            <%}else if(casilla.carta === 'DNK' || casilla.carta === 'Start'){%>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></td>
+                                            <%}else {                                                         /*SI ES UNA CASILLA OCUPADA (Distinta de Start o DNK) -> CREAMOS ENLACE*/ %>
+                                                <td><a href="/tablero/bomba/<%=datosPartida.id_partida%>/<%=casilla.fila%>/<%=casilla.columna%>/<%=datosJuego.cartaEspecialEnJuego.id%>"><div class="casillaEnJuego"><img src="/images/<%=casilla.carta%>.png" width="60" height="60" alt="casilla"></div></a></td>
+                                            <%}%>
+                                        <% }%>
+                                    <% }); %>
+                                </tr>
+                            <% }); %>
+                        </table>
+                    </div>
+                </div>
+                <!-- End tablero  -->
+                <br>
+               <!-- Begin cartas jugador  -->
+               <div class="caja">
+                   <%if(datosPartida.estado !== 'terminada') {%>
+                       <h3 class="pacifico">Tus cartas</h3>
+                           <table>
+                               <tr>
+                                   <td class="baraja capsuula">Cartas normales en tu mano: </td>
+                                   <%/* recorremos las cartas normales de un jugador*/  %>
+                                   <% datosCartasJugador.normales.forEach(function (carta, pos) {   %>
+                                       <% if (datosJuego.cartaEnJuego.carta !== null ){ /* Si se ha seleccionado una CARTA NORMAL */ %>
+                                           <% if (Number(datosJuego.cartaEnJuego.pos) === pos){ /* Si la Posicion de la carta seleccionada es igual a 'pos' , entonces añadimos una clase 'cartaEnJuego' que coloreara el borde de la carta*/%>
+                                               <td><div class="cartaEnJuego"><a href="/tablero/procesar_carta/<%=datosPartida.id_partida%>/<%=carta.id_carta%>/<%=pos%>/<%=carta.id_cartas_juegan%>"><img src="/images/<%=carta.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                           <%} else {%>
+                                               <td><div class="carta"><a href="/tablero/procesar_carta/<%=datosPartida.id_partida%>/<%=carta.id_carta%>/<%=pos%>/<%=carta.id_cartas_juegan%>"><img src="/images/<%=carta.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                           <%}%>
+                                       <%} else { /*si no hay carta seleccionada*/ %>
+                                            <% if(datosPartida.turno === usuario && datosPartida.bloqueo === 0){ /* si es mi turno puedo seleccionar una carta*/%>
+                                                <td><div class="carta"><a href="/tablero/procesar_carta/<%=datosPartida.id_partida%>/<%=carta.id_carta%>/<%=pos%>/<%=carta.id_cartas_juegan%>"><img src="/images/<%=carta.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                            <%}else{ /* sin no tiene turno no puede seleccionar ninguna carta*/ %>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=carta.id_carta%>.png" width="60" height="60" alt="carta"></div></td>
+                                            <%}%>
+                                       <%}%>
+                                   <% }); /* End recorrido cartas normales */%>
+
+                               </tr>
+                               <tr>
+                                    <td class="baraja capsuula">Cartas especiales en tu mano: </td>
+                                   <%/* *******************************recorremos las cartas especiales de un jugador *********************/ %>
+                                   <% datosCartasJugador.especiales.forEach(function (cartaEspecial, pos) { %>
+                                       <% /* Si se ha seleccionado una CARTA */ %>
+                                       <% if (datosJuego.cartaEspecialEnJuego.carta !== null ){ %>
+                                           <% if (Number(datosJuego.cartaEspecialEnJuego.pos) === pos){ /* Si la Posicion de la carta seleccionada es igual a 'pos' , entonces añadimos una clase 'cartaEnJuego' que coloreara el borde de la carta*/%>
+                                               <td><div class="cartaEnJuego"><a href="/tablero/procesar_carta_especial/<%=datosPartida.id_partida%>/<%=cartaEspecial.id_carta%>/<%=pos%>"><img src="/images/<%=cartaEspecial.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                           <%} else {%>
+                                               <td><div class="carta"><a href="/tablero/procesar_carta_especial/<%=datosPartida.id_partida%>/<%=cartaEspecial.id_carta%>/<%=pos%>/<%=cartaEspecial.id_cartas_partidas%>"><img src="/images/<%=cartaEspecial.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                           <%}%>
+
+                                       <%} else { /*si no hay carta seleccionada*/ %>
+                                            <% if(datosPartida.turno === usuario  && datosPartida.bloqueo === 0){ /* si es mi turno puedo seleccionar una carta*/%>
+                                                <td><div class="carta"><a href="/tablero/procesar_carta_especial/<%=datosPartida.id_partida%>/<%=cartaEspecial.id_carta%>/<%=pos%>/<%=cartaEspecial.id_cartas_partidas%>"><img src="/images/<%=cartaEspecial.id_carta%>.png" width="60" height="60" alt="carta"></a></div></td>
+                                            <%}else{ /* sin no tiene turno no puede seleccionar ninguna carta*/ %>
+                                                <td><div class="casillaDeshabilitada"><img src="/images/<%=cartaEspecial.id_carta%>.png" width="60" height="60" alt="carta"></div></td>
+                                            <%}%>
+                                       <%}%>
+                                   <% }); /******************************* End recorrido cartas eespeciales ***************************** */%>
+                               </tr>
+
+                           </table>
+                            <br>
+                               <% /* Si se ha seleccionado una CARTA ESPECIAL y cumple con la condicion , entonces se muestran los botones***/ %>
+                               <% if (datosJuego.cartaEspecialEnJuego.carta === 'PicoArreglado' ){ %>
+                                        <% /* DESBLOQUEAR JUGADORES */%>
+                                        <%datosJugadores.forEach(function (jugador) { %>
+                                            <% if(jugador.bloqueo === 1){/*MOSTRAMOS SOLO  BLOQUEADOS*/%>
+                                                <a href="/tablero/desbloquear_jugador/<%=datosPartida.id_partida%>/<%=jugador.id_juegan%>/<%=datosJuego.cartaEspecialEnJuego.id%>"><button class="botonUnirse capsuula marginJugadoresPicos" type="button" name="<%=jugador.usuario%>"><%=jugador.usuario%></button></a>
+                                            <%}%>
+                                        <% }); %>
+                               <%} else if (datosJuego.cartaEspecialEnJuego.carta === 'PicoRoto'){%>
+                                       <% /* BLOQUEAR JUGADOR */%>
+                                       <%datosJugadores.forEach(function (jugador) { %>
+                                           <% if(jugador.bloqueo === 0){/*MOSTRAMOS SOLO NO BLOQUEADOS*/%>
+                                               <a href="/tablero/bloquear_jugador/<%=datosPartida.id_partida%>/<%=jugador.id_juegan%>/<%=datosJuego.cartaEspecialEnJuego.id%>"><button class="botonUnirse capsuula marginJugadoresPicos" type="button" name="<%=jugador.usuario%>"><%=jugador.usuario%></button></a>
+                                           <%}%>
+                                       <% }); %>
+                               <% }; %>
+                            <% if (datosJuego.cartaEnJuego.carta !== null ){ /* Si se ha seleccionado una CARTA normal */ %>
+                                <a href="/tablero/descartar/<%=datosPartida.id_partida%>/<%=datosJuego.cartaEnJuego.carta%>"><button class="botonUnirse capsuula" type="submit">Descartar</button></a>
+                            <%}%>
+                       <%/*Si no tiene el turno mostramos este mensaje*/%>
+                       <%if(datosPartida.turno !== usuario){%>
+                           <p class="capsuula">Aún no es tu turno. Debes esperar para jugar una carta.</p>
+                       <%/*SI ESTA BLOQUEADO*/%>
+                       <%}else if(datosPartida.bloqueo === 1){%>
+                           <p class="capsuula">Estas bloqueado tienes que pasar turno</p>
+                           <a href="/tablero/pasarTurno/<%=datosPartida.id_partida%>"><button class="botonUnirse capsuula" type="submit">Pasar turno</button></a>
+                       <%}%>
+                       <%}%>
+               </div>
+               <!-- End cartas jugador  -->
+
+                <!-- Begin comentarios  -->
+                <h3 class="pacifico centrar">Comentarios</h3>
+                <div class="comentario fondo_oscuro">
+                    <h5 class="pacifico infoPartidaMargin">Introduce un comentario:</h5>
+                    <form action="/tablero/daoCrearComentario/<%=datosPartida.id_partida%>" method="POST">
+                       <textarea name="comentario" rows="5" cols="50"></textarea>
+                       <br/>
+                       <button class="botonFormulario capsuula centrarInherit" type="submit">Enviar</button>
+                   </form>
+                </div>
+                <%datosComentarios.forEach(function (comentario) { %>
+                    <div class="comentario">
+                        <div class="fotoComentario"><img src="/usuario/obtenerImagen/<%=comentario.id_usuario%>" width="40" height="40" alt="casilla"></div>
+                        <h4 class="rolande infoPartidaMargin userComentario"><%=comentario.usuario%></h4>
+                        <p class="capsuula infoPartidaMargin"><%=comentario.comentario%></p>
+                        <p class="capsuula infoPartidaMargin fechaComentario"><%=comentario.fecha%></p>
+                    </div>
+                    <%});%>
+                <!--End comentarios  -->
+                <br>
+                <a href="/usuario/profile">
+                    <p class="back pacifico centrarTable">Volver a tu perfil</p>
+                </a>
+                <br>
+                <br>
+    </body>
+</html>
